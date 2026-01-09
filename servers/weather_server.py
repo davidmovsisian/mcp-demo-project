@@ -3,6 +3,7 @@ Weather MCP Server with ServerTool class.
 """
 from dataclasses import dataclass
 from typing import Any, Callable, Awaitable
+import sys
 import anyio
 import click
 import mcp.types as types
@@ -38,7 +39,7 @@ class ServerTool:
             name=self.name,
             title=self.title,
             description=self.description,
-            inputSchema=self. input_schema
+            inputSchema=self.input_schema
         )
     
     async def execute(self, arguments: dict) -> str:
@@ -194,12 +195,13 @@ def main(port:  int, transport: str) -> int:
         from mcp.server.stdio import stdio_server
         
         async def run_stdio():
+            # Print to stderr (stdout is reserved for MCP protocol)
+            print("🌤️ Weather Server starting (STDIO transport)", file=sys.stderr)
             async with stdio_server() as streams:
                 await app.run(
                     streams[0], streams[1], app.create_initialization_options()
                 )
         
-        print("🌤️ Weather Server starting (STDIO transport)")
         anyio.run(run_stdio)
     
     return 0
