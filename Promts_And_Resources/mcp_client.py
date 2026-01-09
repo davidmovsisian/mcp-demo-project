@@ -5,12 +5,20 @@ MCP Client with OpenAI Integration
 
 import asyncio
 import os
+import sys
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from openai import OpenAI
 
+# Validate OpenAI API key
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    print("Error: OPENAI_API_KEY environment variable is not set.", file=sys.stderr)
+    print("Please set it with: export OPENAI_API_KEY='your-key-here'", file=sys.stderr)
+    sys.exit(1)
+
 # Initialize OpenAI client
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai_client = OpenAI(api_key=api_key)
 
 
 async def main():

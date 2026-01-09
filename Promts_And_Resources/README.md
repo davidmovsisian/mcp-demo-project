@@ -1,5 +1,7 @@
 # MCP Prompts and Resources Implementation
 
+> **Note:** The folder is named `Promts_And_Resources` (with "Promts" instead of "Prompts") as specified in the project requirements.
+
 Complete Python implementation of MCP (Model Context Protocol) server with prompts, resources, and tools, integrated with OpenAI.
 
 ## Features

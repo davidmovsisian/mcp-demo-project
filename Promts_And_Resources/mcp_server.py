@@ -386,7 +386,7 @@ async def call_tool(name: str, arguments: Any) -> CallToolResult:
         title = arguments.get("title")
         priority = arguments.get("priority", "medium")
         
-        new_id = max(t["id"] for t in PROJECT_DATA["tasks"]) + 1
+        new_id = max((t["id"] for t in PROJECT_DATA["tasks"]), default=0) + 1
         new_task = {
             "id": new_id,
             "title": title,
